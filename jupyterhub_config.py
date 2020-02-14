@@ -11,7 +11,7 @@ c.JupyterHub.hub_ip = '0.0.0.0'
 c.JupyterHub.hub_connect_ip = 'jupyterhub'
 # pick a docker image. This should have the same version of jupyterhub
 # in it as our Hub.
-c.DockerSpawner.image = 'jupyter/base-notebook'
+c.DockerSpawner.image = 'jupyter/datascience-notebook'
 # tell the user containers to connect to our docker network
 c.DockerSpawner.network_name = 'jupyterhub'
 # delete containers when the stop
