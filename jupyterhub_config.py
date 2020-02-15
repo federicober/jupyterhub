@@ -9,13 +9,41 @@ c.JupyterHub.hub_ip = '0.0.0.0'
 # the hostname/ip that should be used to connect to the hub
 # this is usually the hub container's name
 c.JupyterHub.hub_connect_ip = 'jupyterhub'
-# pick a docker image. This should have the same version of jupyterhub
-# in it as our Hub.
-c.DockerSpawner.image = 'jupyter/datascience-notebook'
 # tell the user containers to connect to our docker network
 c.DockerSpawner.network_name = 'jupyterhub'
 # delete containers when the stop
 c.DockerSpawner.remove = True
+
+# # pick a docker image. This should have the same version of jupyterhub
+# # in it as our Hub.
+# c.DockerSpawner.image = 'jupyter/datascience-notebook'
+
+from dockerspawner import DockerSpawner
+
+class DemoFormSpawner(DockerSpawner):
+
+    def _options_form_default(self):
+        default_stack = "jupyter/minimal-notebook"
+        return """
+        <label for="stack">Select your desired stack</label>
+        <select name="stack" size="1">
+        <option value="jupyter/tensorflow-notebook">Tensorflow</option>
+        <option value="jupyter/datascience-notebook">Datascience</option>
+        <option value="jupyter/all-spark-notebook">Spark</option>
+        </select>
+        """.format(stack=default_stack)
+
+    def options_from_form(self, formdata):
+        options = {}
+        options['stack'] = formdata['stack']
+        container_image = ''.join(formdata['stack'])
+        print("SPAWN: " + container_image + " IMAGE" )
+        self.container_image = container_image
+        return options
+
+c.JupyterHub.spawner_class = DemoFormSpawner
+
+
 
 
 # # dummy for testing. Don't use this in production!
