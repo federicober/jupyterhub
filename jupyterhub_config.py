@@ -72,10 +72,11 @@ c.JupyterHub.spawner_class = DemoFormSpawner
 # c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
 
 # OAuth with GitHub
-c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
-c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
+c.JupyterHub.authenticator_class = 'oauthenticator.GoogleOAuthenticator'
+c.GoogleOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
+c.GoogleOAuthenticator.client_id = os.environ['CLIENT_ID']
+c.GoogleOAuthenticator.client_secret = os.environ['CLIENT_SECRET']
 
-c.Authenticator.whitelist = whitelist = set()
 c.Authenticator.admin_users = admin = set()
 join = os.path.join
 here = os.path.dirname(__file__)
@@ -85,9 +86,7 @@ with open(join(here, 'userlist')) as f:
             continue
         parts = line.split()
         name = parts[0]
-        whitelist.add(name)
-        if len(parts) > 1 and parts[1] == 'admin':
-            admin.add(name)
+        admin.add(name)
 
 
 
