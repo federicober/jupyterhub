@@ -29,6 +29,8 @@ CLIENT_SECRET=...
 OAUTH_CALLBACK_URL=...
 ```
 
+To use SSL encryption copy the key as `ssl.key` and the certificate as `ssl.cert` into the `ssl` directory.
+
 Further configuration can be achieved by modifying the `.env` file or overriding the variables in the shell.
 
 ## Acknowledgement
