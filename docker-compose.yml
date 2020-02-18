@@ -5,21 +5,7 @@
 version: "3.5"
 
 services:
-  hub-db:
-    image: postgres:9.5
-    container_name: jupyterhub-db
-    restart: always
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      PGDATA: ${DB_VOLUME_CONTAINER}
-    env_file:
-      - secrets/postgres.env
-    volumes:
-      - "db:${DB_VOLUME_CONTAINER}"
-
   hub:
-    depends_on:
-      - hub-db
     build:
       context: .
       dockerfile: Dockerfile
@@ -36,8 +22,6 @@ services:
       - "data:${DATA_VOLUME_CONTAINER}"
     ports:
       - "${HUB_PORT}:${HUB_PORT}"
-    links:
-      - hub-db
     environment:
       # All containers will join this network
       DOCKER_NETWORK_NAME: ${DOCKER_NETWORK_NAME}

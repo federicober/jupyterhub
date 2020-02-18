@@ -1,2 +1,2 @@
-dockerspawner
-oauthenticator
+dockerspawner==0.11.*
+oauthenticator==0.11.*
