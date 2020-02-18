@@ -33,7 +33,6 @@ services:
       # Port info
       HUB_PORT: ${HUB_PORT}
     env_file:
-      - secrets/postgres.env
       - secrets/oauth.env
     command: >
       jupyterhub
