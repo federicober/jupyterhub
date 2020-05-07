@@ -8,3 +8,8 @@ COPY ssl/ /srv/jupyterhub/ssl/
 
 RUN pip install --upgrade pip &&\
 	pip install --no-cache -r /tmp/requirements.txt
+
+RUN rm -rf /tmp/*
+
+CMD "jupyterhub"
+
