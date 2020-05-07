@@ -80,15 +80,13 @@ c.GoogleOAuthenticator.client_secret = os.environ['CLIENT_SECRET']
 c.Authenticator.admin_users = admin = set()
 join = os.path.join
 here = os.path.dirname(__file__)
-with open(join(here, 'userlist')) as f:
+with open(join(here, 'adminlist')) as f:
     for line in f:
         if not line:
             continue
         parts = line.split()
         name = parts[0]
         admin.add(name)
-
-
 
 # ssl config
 ssl = join(here, 'ssl')
